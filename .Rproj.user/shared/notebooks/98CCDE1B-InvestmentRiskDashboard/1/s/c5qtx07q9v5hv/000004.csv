@@ -1,0 +1,1 @@
+"0","InvestmentRiskDashboard %>% filter(outlook == ""Negative"") %>% select(company_site, class, capital_input, current_value) %>% knitr::kable(caption = ""Investments with negative outlook"")"

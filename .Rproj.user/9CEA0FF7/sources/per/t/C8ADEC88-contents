@@ -1,0 +1,96 @@
+---
+title: "**An Overview of Siam Investments Portfolio & Risk Exposure**"
+author: "Siam Investment Limited Board of Directors"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: false
+  prettydoc::html_pretty:
+    theme: hpstr
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.width=7, fig.height=4)
+library(tidyverse)
+library(gt)
+library(ggthemes)
+library(skimr)
+library(prettydoc)
+library(gt)
+library(tidyquant)
+```
+
+# **Background**
+SIAM, which stands for Single Aim, was started in 2006 by seven friends who later invited others to join the group. By the end of the year membership had increased to 17. The members agreed to contribute an initial investment of KES 100,000 to kick-start the group. Subsequently, the group was able to raise KES 2.1 Million(USD 21,000) as some members brought in more capital. Our membership is currently 75 and the group has converted to a public limited company to accommodate more numbers as required by the law. 
+
+*MISSION: We are committed to actualize shareholders dream, transforming lives through innovative investments that deliver passive income.*
+
+*VISION: Our vision is to deliver financial freedom to all our shareholders by 2027 and release generations from want.*
+
+In this report, we present an overview of the SIAM portfolio and the roadmap to financial freedom by 2027.
+
+```{r read_data, echo = FALSE}
+library(readxl)
+InvestmentRiskDashboard <- read_excel("InvestmentRiskDashboard.xlsx", 
+    sheet = "R")
+
+InvestmentRiskDashboard <- InvestmentRiskDashboard %>% set_names(names(.) %>% str_replace_all(" ", "_") %>% str_replace_all("\\/", "") %>% str_replace_all("\\*", "") %>% str_to_lower())
+```
+# **Purpose of the Report**
+This 4 page report serves three purposes;
+
+1. To give the shareholders of SIAM a snapshot of the investments held by the company. The directors note that the financial reports are not presented in a format that most members without a finance or accounting background can understand. Hence, this report serves to offer a simplified version of assets held by SIAM.
+
+2. To evaluate the risk profile of investments held by SIAM and communicate them to the shareholders. Recently, the directors reported that parcels of land owned by SIAM and by individual members of SIAM had been repossessed by the government. While that was unfortunate, the assets present a fraction of assets owned by the company. This report serves to disclose the other assets and the risk associated with each asset. For ease of consumption, the directors have classified each asset into three risk categories; positive, uncertain, and negative. The classifications are clarified in the sections that follow. 
+
+3. To facilitate SIAM members to make informed decisions during the upcoming annual meeting. 
+
+# **Investment Classes**
+As the figure below shows SIAM has the bulk of the investment is in real estate (43%), private equity (33%), loan notes (14%) and 10% in Listed (Quoted) Companies. A breakdown of each class of investment is in the appendix.
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE,eval=FALSE}
+InvestmentRiskDashboard %>% group_by(class) %>% summarize(Count = n(), Amount = sum(current_value)) %>% mutate(Prop = paste(round(Amount / sum(Amount) * 100, 2), "%")) %>% ungroup() %>% set_names(names(.) %>% str_to_title()) %>% knitr::kable()
+```
+
+```{r}
+InvestmentRiskDashboard %>% group_by(class) %>% summarize(total = sum(current_value)) %>% mutate(total_text = scales::comma(total)) %>% ggplot(aes(x = class, y = total)) + geom_col() + geom_label(aes(label = total_text)) + theme_tq() + scale_fill_tq() + theme(axis.text.y = element_blank()) + labs(x = "Class", y = "Total", title = "SIAM INVESTMENTS LIMITED PORTFOLIO 2020")
+```
+
+# **Investment Risk Profile**
+```{r}
+InvestmentRiskDashboard %>% group_by(class, outlook) %>% summarize(total = sum(current_value)) %>% ggplot(aes(x = class, y = total, fill = outlook)) + geom_col() + coord_flip() + theme_tq() + scale_y_continuous(labels = scales::comma)
+```
+
+# **Distressed Investments**
+
+## **Investments with Negative Outlook**
+Investments worth() and that account for ()% of total portfolio have a negative outlook. These investments are detailed in table () below. SIAM may have to write off from the books of accounts. 
+
+```{r}
+InvestmentRiskDashboard %>% filter(outlook == "Negative") %>% select(company_site, class, capital_input, current_value) %>% gt()
+```
+
+*Notes*
+
+## **Investments with Uncertain Outlook**
+Uncertain investments amount to Ksh () and account for ()% of the portfolio, broken down as follows.
+
+```{r}
+InvestmentRiskDashboard %>% filter(outlook == "Uncertain") %>% select(company_site, class, capital_input, current_value) %>% gt()
+```
+
+*Notes*
+
+
+# **Conclusion**
+
+\newpage
+# **Overall Portfolio**
+```{r}
+InvestmentRiskDashboard %>% select(company_site, class, outlook, capital_input, current_value) %>% gt()
+```
+
+
+

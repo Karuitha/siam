@@ -1,0 +1,1 @@
+"0","InvestmentRiskDashboard %>% group_by(class) %>% summarize(Count = n(), Amount = sum(current_value)) %>% mutate(Prop = paste(round(Amount / sum(Amount) * 100, 2), ""%"")) %>% ungroup() %>% set_names(names(.) %>% str_to_title()) %>% knitr::kable()"

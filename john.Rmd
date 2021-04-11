@@ -1,0 +1,13 @@
+---
+title: "My Work"
+author: "John Karuitha"
+header-includes:
+- \usepackage{pdflscape}
+- \newcommand{\blandscape}{\begin{landscape}}
+- \newcommand{\elandscape}{\end{landscape}}
+output: 
+  pdf_document:
+    toc: true
+---
+
+\blandscape

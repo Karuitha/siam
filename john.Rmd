@@ -7,7 +7,7 @@ header-includes:
 - \newcommand{\elandscape}{\end{landscape}}
 output: 
   pdf_document:
-    toc: true
+    toc: false
 ---
 
 \blandscape

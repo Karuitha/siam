@@ -1,1 +1,0 @@
-"0","InvestmentRiskDashboard %>% select(company_site, class, outlook, capital_input, current_value) %>% knitr::kable(caption = ""Siam Investments Limited Overall Portfolio"")"

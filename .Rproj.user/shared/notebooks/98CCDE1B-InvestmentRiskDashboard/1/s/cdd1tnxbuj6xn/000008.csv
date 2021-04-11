@@ -1,3 +1,0 @@
-"0","InvestmentRiskDashboard %>% group_by(class, outlook) %>% summarize(total = sum(current_value)) %>% ggplot(aes(x = class, y = total, fill = outlook)) + geom_col() + coord_flip() + theme_tq() + scale_y_continuous(labels = scales::comma) + "
-"0","  "
-"0","  theme(legend.title = element_blank()) + ggtitle(""Investment Risk Profile by Class"")"

@@ -1,5 +1,0 @@
-"0","library(readxl)"
-"0","InvestmentRiskDashboard <- read_excel(""InvestmentRiskDashboard.xlsx"", "
-"0","    sheet = ""R"")"
-"0",""
-"0","InvestmentRiskDashboard <- InvestmentRiskDashboard %>% set_names(names(.) %>% str_replace_all("" "", ""_"") %>% str_replace_all(""\\/"", """") %>% str_replace_all(""\\*"", """") %>% str_to_lower())"
